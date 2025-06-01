@@ -3,41 +3,38 @@
 
 void En_clock(void);
 void gpio_setup(void);
+
 void delay_ms(void);
 void delay(uint32_t count);
 void systick_config(void);
+
 uint8_t debounce(uint8_t last);
 
-void ADC_config(void);
+uint16_t analog_data = 0;
 
+void ADC_config(void);
+void ADC1_2_IRQHandler(void);
 
 int main(void){
-	uint8_t lastb = 0, currentb=0;
+	//uint8_t lastb = 0, currentb=0;
 	En_clock();
 	gpio_setup();
 	systick_config();
 	ADC_config();
-	
-	uint16_t analog_data = 0;
-	
-	// reading current level to set value max and min
+		
+	// reading current ADC level to set value max and min
 	delay(1000);
 	if(ADC1->SR & ADC_SR_EOC){ 
 	analog_data = ADC1->DR;
 	}
-	uint16_t max_val = analog_data - 0x0100;
-	uint16_t min_val = max_val - 0x0200;
+	
+	uint16_t max_val = analog_data + 0x0150;
+	uint16_t min_val = analog_data - 0x0100;
 
 	while(1){
-			
-			
-	//If conversion is done, read the data
-			if(ADC1->SR & ADC_SR_EOC){ 
-				analog_data = ADC1->DR;
-				//analog_data = analog_data;
-				}
-	// Turn on 1 led if its dark, 2 if natural, 3 if bright	
-				if( analog_data>max_val){
+		//value of analog_data is assigned from interrupt handler. 
+		// Turn on 1 led if its dark, 2 if natural, 3 if bright	
+				if( analog_data>max_val){ 
 					//turn on A2 and A3, A5
 					GPIOA->ODR |= GPIO_ODR_ODR2;
 					GPIOA->ODR |= GPIO_ODR_ODR3;
@@ -57,7 +54,10 @@ int main(void){
 					GPIOA->ODR &= ~GPIO_ODR_ODR5;	
 				
 				}
-		
+				
+				// after changing the light state, now ADC can be enabled to sacn again. 
+				ADC1->CR2 |= ADC_CR2_ADON;
+			
 			
 			//checking loop main function is running 
 			GPIOA->ODR |=  GPIO_ODR_ODR6;
@@ -135,6 +135,17 @@ void ADC_config(void){
 	ADC1->CR2 = 0;
 	ADC1->SQR3 = 1;
 	ADC1->CR2 |= ADC_CR2_ADON | ADC_CR2_CONT;//ADC power on 
+	ADC1->CR1 |= ADC_CR1_EOCIE; //enabling EOC interrupt
+	
+	__disable_irq();
+	NVIC_EnableIRQ(ADC1_2_IRQn);
+	__enable_irq();
+	
 	delay(500);
 	ADC1->CR2 |= ADC_CR2_ADON;//enable adc and start continuous conversion 
+}
+
+void ADC1_2_IRQHandler(void){
+	ADC1->CR2 &= ~ADC_CR2_ADON; //disable ADC otherwise it will interrupt before changing the light state. 
+	analog_data = ADC1->DR;
 }
