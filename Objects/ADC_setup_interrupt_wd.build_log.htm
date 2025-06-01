@@ -27,16 +27,19 @@ Project File Date:  06/01/2025
 <h2>Output:</h2>
 *** Using Compiler 'V6.23', folder: 'C:\Users\Syed Shifat\AppData\Local\Keil_v5\ARM\ARMCLANG\Bin'
 Rebuild target 'Target_1'
-compiling system_stm32f10x.c...
-main.c(16): warning: variable 'currentb' set but not used [-Wunused-but-set-variable]
-   16 |         uint8_t lastb = 0, currentb=0;
-      |                            ^
-1 warning generated.
-compiling main.c...
 assembling startup_stm32f10x_ld.s...
+compiling system_stm32f10x.c...
+main.c(15): warning: unused variable 'lastb' [-Wunused-variable]
+   15 |         uint8_t lastb = 0, currentb=0;
+      |                 ^~~~~
+main.c(15): warning: unused variable 'currentb' [-Wunused-variable]
+   15 |         uint8_t lastb = 0, currentb=0;
+      |                            ^~~~~~~~
+2 warnings generated.
+compiling main.c...
 linking...
-Program Size: Code=1308 RO-data=252 RW-data=0 ZI-data=1632  
-".\Objects\ADC_setup_interrupt_wd.axf" - 0 Error(s), 1 Warning(s).
+Program Size: Code=1384 RO-data=252 RW-data=0 ZI-data=1632  
+".\Objects\ADC_setup_interrupt_wd.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -67,7 +70,7 @@ Package Vendor: Keil
       Source file:   Device/Source/system_stm32f10x.c
       Include file:  RTE_Driver/Config/RTE_Device.h
       Source file:   Device/Source/ARM/STM32F1xx_OPT.s
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>

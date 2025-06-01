@@ -8,7 +8,6 @@ Section Cross References
     main.o(.text.main) refers to main.o(.text.gpio_setup) for gpio_setup
     main.o(.text.main) refers to main.o(.text.systick_config) for systick_config
     main.o(.text.main) refers to main.o(.text.ADC_config) for ADC_config
-    main.o(.text.main) refers to main.o(.text.debounce) for debounce
     main.o(.text.main) refers to main.o(.text.delay) for delay
     main.o(.ARM.exidx.text.main) refers to main.o(.text.main) for [Anonymous Symbol]
     main.o(.ARM.exidx.text.En_clock) refers to main.o(.text.En_clock) for [Anonymous Symbol]
@@ -16,11 +15,11 @@ Section Cross References
     main.o(.ARM.exidx.text.systick_config) refers to main.o(.text.systick_config) for [Anonymous Symbol]
     main.o(.text.ADC_config) refers to main.o(.text.delay) for delay
     main.o(.ARM.exidx.text.ADC_config) refers to main.o(.text.ADC_config) for [Anonymous Symbol]
-    main.o(.text.debounce) refers to main.o(.text.delay) for delay
-    main.o(.ARM.exidx.text.debounce) refers to main.o(.text.debounce) for [Anonymous Symbol]
     main.o(.text.delay) refers to main.o(.text.delay_ms) for delay_ms
     main.o(.ARM.exidx.text.delay) refers to main.o(.text.delay) for [Anonymous Symbol]
     main.o(.ARM.exidx.text.delay_ms) refers to main.o(.text.delay_ms) for [Anonymous Symbol]
+    main.o(.text.debounce) refers to main.o(.text.delay) for delay
+    main.o(.ARM.exidx.text.debounce) refers to main.o(.text.debounce) for [Anonymous Symbol]
     startup_stm32f10x_ld.o(STACK) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup_stm32f10x_ld.o(HEAP) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup_stm32f10x_ld.o(RESET) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
@@ -156,9 +155,10 @@ Removing Unused input sections from the image.
     Removing main.o(.ARM.exidx.text.gpio_setup), (8 bytes).
     Removing main.o(.ARM.exidx.text.systick_config), (8 bytes).
     Removing main.o(.ARM.exidx.text.ADC_config), (8 bytes).
-    Removing main.o(.ARM.exidx.text.debounce), (8 bytes).
     Removing main.o(.ARM.exidx.text.delay), (8 bytes).
     Removing main.o(.ARM.exidx.text.delay_ms), (8 bytes).
+    Removing main.o(.text.debounce), (74 bytes).
+    Removing main.o(.ARM.exidx.text.debounce), (8 bytes).
     Removing main.o(.ARM.use_no_argv), (4 bytes).
     Removing system_stm32f10x.o(.text), (0 bytes).
     Removing system_stm32f10x.o(.ARM.exidx.text.SystemInit), (8 bytes).
@@ -169,7 +169,7 @@ Removing Unused input sections from the image.
     Removing system_stm32f10x.o(.data.SystemCoreClock), (4 bytes).
     Removing system_stm32f10x.o(.rodata.AHBPrescTable), (16 bytes).
 
-18 unused section(s) (total 410 bytes) removed from the image.
+19 unused section(s) (total 484 bytes) removed from the image.
 
 ==============================================================================
 
@@ -296,12 +296,11 @@ Image Symbol Table
     SetSysClockTo72                          0x080002c1   Thumb Code   290  system_stm32f10x.o(.text.SetSysClockTo72)
     [Anonymous Symbol]                       0x080002c0   Section        0  system_stm32f10x.o(.text.SetSysClockTo72)
     [Anonymous Symbol]                       0x080003e4   Section        0  system_stm32f10x.o(.text.SystemInit)
-    [Anonymous Symbol]                       0x0800044c   Section        0  main.o(.text.debounce)
-    [Anonymous Symbol]                       0x08000498   Section        0  main.o(.text.delay)
-    [Anonymous Symbol]                       0x080004b4   Section        0  main.o(.text.delay_ms)
-    [Anonymous Symbol]                       0x080004cc   Section        0  main.o(.text.gpio_setup)
-    [Anonymous Symbol]                       0x08000534   Section        0  main.o(.text.main)
-    [Anonymous Symbol]                       0x080005dc   Section        0  main.o(.text.systick_config)
+    [Anonymous Symbol]                       0x0800044c   Section        0  main.o(.text.delay)
+    [Anonymous Symbol]                       0x08000468   Section        0  main.o(.text.delay_ms)
+    [Anonymous Symbol]                       0x08000480   Section        0  main.o(.text.gpio_setup)
+    [Anonymous Symbol]                       0x080004e8   Section        0  main.o(.text.main)
+    [Anonymous Symbol]                       0x08000628   Section        0  main.o(.text.systick_config)
     .bss                                     0x20000000   Section       96  libspace.o(.bss)
     Heap_Mem                                 0x20000060   Data         512  startup_stm32f10x_ld.o(HEAP)
     HEAP                                     0x20000060   Section      512  startup_stm32f10x_ld.o(HEAP)
@@ -460,14 +459,13 @@ Image Symbol Table
     ADC_config                               0x08000255   Thumb Code    78  main.o(.text.ADC_config)
     En_clock                                 0x080002a5   Thumb Code    18  main.o(.text.En_clock)
     SystemInit                               0x080003e5   Thumb Code   102  system_stm32f10x.o(.text.SystemInit)
-    debounce                                 0x0800044d   Thumb Code    74  main.o(.text.debounce)
-    delay                                    0x08000499   Thumb Code    28  main.o(.text.delay)
-    delay_ms                                 0x080004b5   Thumb Code    24  main.o(.text.delay_ms)
-    gpio_setup                               0x080004cd   Thumb Code   102  main.o(.text.gpio_setup)
-    main                                     0x08000535   Thumb Code   166  main.o(.text.main)
-    systick_config                           0x080005dd   Thumb Code    44  main.o(.text.systick_config)
-    Region$$Table$$Base                      0x08000608   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08000618   Number         0  anon$$obj.o(Region$$Table)
+    delay                                    0x0800044d   Thumb Code    28  main.o(.text.delay)
+    delay_ms                                 0x08000469   Thumb Code    24  main.o(.text.delay_ms)
+    gpio_setup                               0x08000481   Thumb Code   102  main.o(.text.gpio_setup)
+    main                                     0x080004e9   Thumb Code   318  main.o(.text.main)
+    systick_config                           0x08000629   Thumb Code    44  main.o(.text.systick_config)
+    Region$$Table$$Base                      0x08000654   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08000664   Number         0  anon$$obj.o(Region$$Table)
     __libspace_start                         0x20000000   Data          96  libspace.o(.bss)
     __temporary_stack_top$libspace           0x20000060   Data           0  libspace.o(.bss)
 
@@ -479,9 +477,9 @@ Memory Map of the image
 
   Image Entry point : 0x08000199
 
-  Load Region LR_1 (Base: 0x08000000, Size: 0x00000618, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x08000000, Size: 0x00000664, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00000618, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00000664, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -553,24 +551,22 @@ Memory Map of the image
     0x080003e2   0x080003e2   0x00000002   PAD
     0x080003e4   0x080003e4   0x00000066   Code   RO           35    .text.SystemInit    system_stm32f10x.o
     0x0800044a   0x0800044a   0x00000002   PAD
-    0x0800044c   0x0800044c   0x0000004a   Code   RO           12    .text.debounce      main.o
-    0x08000496   0x08000496   0x00000002   PAD
-    0x08000498   0x08000498   0x0000001c   Code   RO           14    .text.delay         main.o
-    0x080004b4   0x080004b4   0x00000018   Code   RO           16    .text.delay_ms      main.o
-    0x080004cc   0x080004cc   0x00000066   Code   RO            6    .text.gpio_setup    main.o
-    0x08000532   0x08000532   0x00000002   PAD
-    0x08000534   0x08000534   0x000000a6   Code   RO            2    .text.main          main.o
-    0x080005da   0x080005da   0x00000002   PAD
-    0x080005dc   0x080005dc   0x0000002c   Code   RO            8    .text.systick_config  main.o
-    0x08000608   0x08000608   0x00000010   Data   RO          219    Region$$Table       anon$$obj.o
+    0x0800044c   0x0800044c   0x0000001c   Code   RO           12    .text.delay         main.o
+    0x08000468   0x08000468   0x00000018   Code   RO           14    .text.delay_ms      main.o
+    0x08000480   0x08000480   0x00000066   Code   RO            6    .text.gpio_setup    main.o
+    0x080004e6   0x080004e6   0x00000002   PAD
+    0x080004e8   0x080004e8   0x0000013e   Code   RO            2    .text.main          main.o
+    0x08000626   0x08000626   0x00000002   PAD
+    0x08000628   0x08000628   0x0000002c   Code   RO            8    .text.systick_config  main.o
+    0x08000654   0x08000654   0x00000010   Data   RO          219    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x08000618, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x08000664, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE)
 
     **** No section assigned to this execution region ****
 
 
-    Execution Region ER_ZI (Exec base: 0x20000000, Load base: 0x08000618, Size: 0x00000660, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x20000000, Load base: 0x08000664, Size: 0x00000660, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -586,14 +582,14 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       534          0          0          0          0       2737   main.o
+       612          0          0          0          0       2873   main.o
         64         26        236          0       1536        856   startup_stm32f10x_ld.o
        400          0          0          0          0       3027   system_stm32f10x.o
 
     ----------------------------------------------------------------------
-      1012         26        252          0       1536       6620   Object Totals
+      1088         26        252          0       1536       6756   Object Totals
          0          0         16          0          0          0   (incl. Generated)
-        14          0          0          0          0          0   (incl. Padding)
+        12          0          0          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -639,15 +635,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      1308         42        252          0       1632       7076   Grand Totals
-      1308         42        252          0       1632       7076   ELF Image Totals
-      1308         42        252          0          0          0   ROM Totals
+      1384         42        252          0       1632       7212   Grand Totals
+      1384         42        252          0       1632       7212   ELF Image Totals
+      1384         42        252          0          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 1560 (   1.52kB)
+    Total RO  Size (Code + RO Data)                 1636 (   1.60kB)
     Total RW  Size (RW Data + ZI Data)              1632 (   1.59kB)
-    Total ROM Size (Code + RO Data + RW Data)       1560 (   1.52kB)
+    Total ROM Size (Code + RO Data + RW Data)       1636 (   1.60kB)
 
 ==============================================================================
 

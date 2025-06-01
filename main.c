@@ -1,4 +1,3 @@
-//pa1 as analog input
 #include<stdint.h>
 #include<stm32f10x.h>
 
@@ -20,24 +19,53 @@ int main(void){
 	ADC_config();
 	
 	uint16_t analog_data = 0;
+	
+	// reading current level to set value max and min
+	delay(1000);
+	if(ADC1->SR & ADC_SR_EOC){ 
+	analog_data = ADC1->DR;
+	}
+	uint16_t max_val = analog_data - 0x0100;
+	uint16_t min_val = max_val - 0x0200;
 
 	while(1){
-			currentb = debounce(lastb);
 			
-			//If conversion is done, read the data
+			
+	//If conversion is done, read the data
 			if(ADC1->SR & ADC_SR_EOC){ 
 				analog_data = ADC1->DR;
-				analog_data = analog_data*1000/0xfff;
-				delay(50);
-			}
-
+				//analog_data = analog_data;
+				}
+	// Turn on 1 led if its dark, 2 if natural, 3 if bright	
+				if( analog_data>max_val){
+					//turn on A2 and A3, A5
+					GPIOA->ODR |= GPIO_ODR_ODR2;
+					GPIOA->ODR |= GPIO_ODR_ODR3;
+					GPIOA->ODR |= GPIO_ODR_ODR5;
+				}
+				else if ( analog_data<min_val){
+					//Turn on A2. but A3, and A5 turn off
+					GPIOA->ODR |= GPIO_ODR_ODR2;
+					GPIOA->ODR &= ~GPIO_ODR_ODR3;
+					GPIOA->ODR &= ~GPIO_ODR_ODR5;		
+				
+				}
+				else {
+					
+					GPIOA->ODR |= GPIO_ODR_ODR2;
+					GPIOA->ODR |= GPIO_ODR_ODR3;
+					GPIOA->ODR &= ~GPIO_ODR_ODR5;	
+				
+				}
+		
+			
 			//checking loop main function is running 
-			GPIOA->ODR |=  GPIO_ODR_ODR3;
+			GPIOA->ODR |=  GPIO_ODR_ODR6;
 			delay(20);
-			GPIOA->ODR &= ~GPIO_ODR_ODR3;
+			GPIOA->ODR &= ~GPIO_ODR_ODR6;
 			delay(20);
 						
-		}
+	}
 	
 	return 0;
 }
@@ -109,8 +137,4 @@ void ADC_config(void){
 	ADC1->CR2 |= ADC_CR2_ADON | ADC_CR2_CONT;//ADC power on 
 	delay(500);
 	ADC1->CR2 |= ADC_CR2_ADON;//enable adc and start continuous conversion 
-	
-
-	//delay(10);
-	//ADC1->CR2 |= ADC_CR2_SWSTART; 
 }
