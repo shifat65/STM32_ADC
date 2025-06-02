@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\Objects\ADC_setup_interrupt_wd.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\ADC_setup_interrupt_wd.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6230001: Last Updated: Sun Jun  1 18:06:44 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6230001: Last Updated: Sun Jun  1 23:41:01 2025
 <BR><P>
-<H3>Maximum Stack Usage =         56 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =         48 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 __rt_entry_main &rArr; main &rArr; ADC_config &rArr; delay
 <P>
@@ -197,7 +197,7 @@ Global Symbols
 <P><STRONG><a name="[6e]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[3a]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 56 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 48 + Unknown Stack Size
 <LI>Call Chain = __rt_entry_main &rArr; main &rArr; ADC_config &rArr; delay
 </UL>
 <BR>[Calls]<UL><LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
@@ -448,14 +448,14 @@ Global Symbols
 
 <P><STRONG><a name="[78]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, indicate_semi.o(.text), UNUSED)
 
-<P><STRONG><a name="[1c]"></a>ADC1_2_IRQHandler</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, main.o(.text.ADC1_2_IRQHandler))
+<P><STRONG><a name="[1c]"></a>ADC1_2_IRQHandler</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, main.o(.text.ADC1_2_IRQHandler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_ld.o(RESET)
 </UL>
-<P><STRONG><a name="[43]"></a>ADC_config</STRONG> (Thumb, 104 bytes, Stack size 16 bytes, main.o(.text.ADC_config))
+<P><STRONG><a name="[43]"></a>ADC_config</STRONG> (Thumb, 150 bytes, Stack size 16 bytes, main.o(.text.ADC_config))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = ADC_config &rArr; delay
 </UL>
-<BR>[Calls]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
-<LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
+<BR>[Calls]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
+<LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -471,28 +471,26 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_ld.o(.text)
 </UL>
-<P><STRONG><a name="[45]"></a>delay</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, main.o(.text.delay))
+<P><STRONG><a name="[44]"></a>delay</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, main.o(.text.delay))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = delay
 </UL>
 <BR>[Calls]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 </UL>
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_config
-<LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[48]"></a>delay_ms</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, main.o(.text.delay_ms))
-<BR><BR>[Called By]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
+<BR><BR>[Called By]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
 </UL>
 
-<P><STRONG><a name="[4a]"></a>gpio_setup</STRONG> (Thumb, 102 bytes, Stack size 0 bytes, main.o(.text.gpio_setup))
+<P><STRONG><a name="[4a]"></a>gpio_setup</STRONG> (Thumb, 118 bytes, Stack size 0 bytes, main.o(.text.gpio_setup))
 <BR><BR>[Called By]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[3b]"></a>main</STRONG> (Thumb, 306 bytes, Stack size 24 bytes, main.o(.text.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = main &rArr; ADC_config &rArr; delay
+<P><STRONG><a name="[3b]"></a>main</STRONG> (Thumb, 266 bytes, Stack size 16 bytes, main.o(.text.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = main &rArr; ADC_config &rArr; delay
 </UL>
-<BR>[Calls]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
-<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_config
+<BR>[Calls]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_config
 <LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;systick_config
 <LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_setup
 <LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;En_clock
@@ -507,7 +505,7 @@ Global Symbols
 <H3>
 Local Symbols
 </H3>
-<P><STRONG><a name="[44]"></a>__NVIC_EnableIRQ</STRONG> (Thumb, 48 bytes, Stack size 4 bytes, main.o(.text.__NVIC_EnableIRQ))
+<P><STRONG><a name="[45]"></a>__NVIC_EnableIRQ</STRONG> (Thumb, 48 bytes, Stack size 4 bytes, main.o(.text.__NVIC_EnableIRQ))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = __NVIC_EnableIRQ
 </UL>
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_config
